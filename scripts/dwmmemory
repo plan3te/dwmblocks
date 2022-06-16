@@ -1,0 +1,13 @@
+#!/bin/sh
+# dwm memory script
+
+# floppy unicode. 
+# code is \uf0c7
+MEM=" "
+
+# memory function
+MEMFUNC="$(free -h | awk '/^Mem/ { print $3 "/" $2 }' | sed s/i//g)"
+
+# output
+# eg.  123M/1.7G |
+echo "$MEM" "$MEMFUNC"

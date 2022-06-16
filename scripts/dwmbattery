@@ -1,0 +1,34 @@
+#!/bin/bash
+
+STATUS=$(cat /sys/class/power_supply/BAT0/status)
+BATT=$(cat /sys/class/power_supply/BAT0/capacity)
+typeset -i b=$(cat /sys/class/power_supply/BAT0/capacity)
+
+# another command to return battery amount 
+# typeset -i b=$(acpi -b| grep -P -o '[0-9]+(?=%)')
+
+
+# conditions of battery level returns specific icon
+if [ "$b" -lt 10 ] 
+    then
+        ICON=""
+elif [ $b -gt 11 -a $b -lt 25 ] 
+    then
+        ICON=""
+elif [ $b -gt 26 -a $b -lt 50 ]
+    then
+        ICON=""
+elif [ $b -gt 51 -a $b -lt 75 ]
+    then
+        ICON=""
+else
+    ICON=""
+fi
+
+# statement to show charging icon when status is charging
+if [ "$STATUS" = "Discharging" ]; 
+    then
+        echo "$ICON " "$BATT%"  
+else
+    echo "" "$ICON " "$BATT%"
+fi

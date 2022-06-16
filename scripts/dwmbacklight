@@ -1,0 +1,7 @@
+#!/bin/bash
+
+kbd_backlight="$(/sys/class/leds/smc::kbd_backlight/brightness)" 
+
+echo "${kbd_backlight}"
+
+# cd /sys/class/leds/smc::kbd_backlight

@@ -1,0 +1,33 @@
+#!/bin/bash 
+# the font awesome cheat sheet was not pasting the volume mute
+# unicode for this icon is f6a9
+
+
+# volume function to return the percentage of the volume
+vol="$(amixer get Master | tail -n1 | sed -r 's/.*\[(.*)%\].*/\1/')"
+
+# muted will return either "on" or "off" refering to the status of the mixer
+# off means muted
+muted="$(amixer get Master | grep % | cut -d '[' -f 4 | cut -d ']' -f 1 )"
+
+
+if [ "$vol" -lt 1 ] 
+    then
+        ICON=""
+elif [ $vol -gt 2 -a $vol -lt 55 ] 
+    then
+        ICON=""
+else
+	ICON=""
+fi
+
+# mute can be called using "\uf6a9"
+
+if [ $muted == "off" ]
+	then
+		echo " ${vol}%"
+else
+    echo "${ICON}" "${vol}%"
+fi
+
+
